@@ -8,7 +8,7 @@ from telegram.ext import Application, CommandHandler, MessageHandler, filters
 load_dotenv()
 logging.basicConfig(level=logging.INFO)
 
-TOKEN = os.env...ip()["BOT_TOKEN"]
+TOKEN=os.env...ip()["BOT_TOKEN"]
 client = OpenAI(base_url="https://api.groq.com/openai/v1", api_key=os.environ["GROQ_API_KEY"])
 
 PERSONA = (
