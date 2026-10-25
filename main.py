@@ -8,8 +8,9 @@ from telegram.ext import Application, CommandHandler, MessageHandler, filters
 load_dotenv()
 logging.basicConfig(level=logging.INFO)
 
-TOKEN=os.env...ip()["BOT_TOKEN"]
-client = OpenAI(base_url="https://api.groq.com/openai/v1", api_key=os.environ["GROQ_API_KEY"])
+TOKEN=os.env...ip()
+GROQ_KEY = os.environ["GROQ_API_KEY"].strip()
+client = OpenAI(base_url="", api_key=GROQ_KEY)
 
 PERSONA = (
     "You are Chamak, a chill desi bro AI friend. Reply in Hinglish, lowercase, short "
@@ -36,20 +37,4 @@ async def chat(update, ctx):
 app = Application.builder().token(TOKEN).build()
 app.add_handler(CommandHandler("start", start))
 app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, chat))
-
-import threading
-from http.server import BaseHTTPRequestHandler, HTTPServer
-
-def health():
-    class H(BaseHTTPRequestHandler):
-        def do_GET(self):
-            self.send_response(200)
-            self.end_headers()
-            self.wfile.write(b"chamak alive")
-        def log_message(self, *a):
-            pass
-    HTTPServer(("0.0.0.0", 7860), H).serve_forever()
-
-threading.Thread(target=health, daemon=True).start()
-
 app.run_polling()
