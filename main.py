@@ -91,6 +91,8 @@ def health():
         def log_message(self, *a):
             pass
     HTTPServer(("0.0.0.0", 7860), H).serve_forever()
+    threading.Thread(target=health, daemon=True).start()
+app.run_polling()
 
 threading.Thread(target=health, daemon=True).start()
 
