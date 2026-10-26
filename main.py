@@ -47,7 +47,7 @@ def ask(chat_id, text, image_b64=None):
     reply = None
     for attempt in range(3):
         try:
-            r = client.chat.completions.create(model="gemini-flash-latest", messages=msgs, max_tokens=800)
+            r = client.chat.completions.create(model="gemini-2.5-flash", messages=msgs, max_tokens=800)
             reply = r.choices[0].message.content
             break
         except Exception as e:
